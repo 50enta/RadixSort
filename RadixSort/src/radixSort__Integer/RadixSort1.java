@@ -1,6 +1,6 @@
-package radixSort;
+package radixSort__Integer;
 
-public class RadixSort2 {
+public class RadixSort1 {
 
     public static void radixSort(int[] arr) {
         if (arr.length == 0) {

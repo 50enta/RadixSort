@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Algorítmo RadixSort, ideal para classisicar inteiros
  */
-package radixsort;
+package radixSort__Integer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,14 +10,20 @@ import java.util.Arrays;
  *
  * @author 50enta
  */
-public class RadixSort3 {
+public class RadixSort2 {
 
-    public static void sort(int[] inputArray) {
+    /**
+     * Método que recebe o array que se deseja ordenar e faz a ordenação usando
+     * o método radix sort
+     *
+     * @param arrayPorOrdenar
+     */
+    public static void sort(int[] arrayPorOrdenar) {
         final int RADIX = 10;
-        ArrayList<Integer>[] bucketArray = new ArrayList[RADIX];
+        ArrayList<Integer>[] matrizAuxiliar = new ArrayList[RADIX];
 
-        for (int pos = 0; pos < bucketArray.length; pos++) {
-            bucketArray[pos] = new ArrayList<>();
+        for (int pos = 0; pos < matrizAuxiliar.length; pos++) {
+            matrizAuxiliar[pos] = new ArrayList<>();
         }
 
         boolean maxDigitsLengthReached = false;
@@ -27,9 +31,9 @@ public class RadixSort3 {
 
         while (!maxDigitsLengthReached) {
             maxDigitsLengthReached = true;
-            for (Integer element : inputArray) {
+            for (Integer element : arrayPorOrdenar) {
                 temp = element / placeValue;
-                bucketArray[temp % RADIX].add(element);
+                matrizAuxiliar[temp % RADIX].add(element);
 
                 if (maxDigitsLengthReached && temp > 0) {
                     maxDigitsLengthReached = false;
@@ -38,20 +42,19 @@ public class RadixSort3 {
 
             int a = 0;
             for (int b = 0; b < RADIX; b++) {
-                for (Integer i : bucketArray[b]) {
-                    inputArray[a++] = i;
+                for (Integer i : matrizAuxiliar[b]) {
+                    arrayPorOrdenar[a++] = i;
                 }
-                bucketArray[b].clear();
+                matrizAuxiliar[b].clear();
             }
             placeValue = placeValue * RADIX;
-        }//while
-
+        }
     }
 
     public static void main(String[] args) {
         int a[] = {100, 54, 35, 102, 45, 10, 287, 005};
         sort(a);
         Arrays.stream(a).forEach(System.out::println);
-    }// main
+    }
 
-}//classe
+}
